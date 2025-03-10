@@ -18,9 +18,10 @@ public class GenericCatalog<T> {
             items.remove(item);
             System.out.println("Item removed: " + item);
             return true;
+        } else {
+            System.out.println("Error: Item not found.");
+            return false;
         }
-        System.out.println("Error: Item not found.");
-        return false;
     }
 
     public boolean itemIDExists(String itemID) {
@@ -32,19 +33,19 @@ public class GenericCatalog<T> {
         return false;
     }
 
-    public void displayItemsTable() {
+    public void displayItems() {
         if (items.isEmpty()) {
             System.out.println("The catalog is empty.");
         } else {
-            System.out.printf("%-10s %-30s %-30s%n", "ID", "| Title", "| Author");
-            System.out.println("------------------------------------------------------------");
+            System.out.printf("%-20s %-30s %-30s%n", "ID", "Title", "Author");
+            System.out.println("------------------------------------------------------------------");
             for (T item : items) {
                 if (item instanceof LibraryItem<?>) {
                     LibraryItem<?> libraryItem = (LibraryItem<?>) item;
-                    System.out.printf("%-10s %-30s %-30s%n",
+                    System.out.printf("%-20s %-30s %-30s%n",
                             libraryItem.getItemID(),
-                            "| " + libraryItem.getTitle(),
-                            "| " + libraryItem.getAuthor());
+                            libraryItem.getTitle(),
+                            libraryItem.getAuthor());
                 }
             }
         }
